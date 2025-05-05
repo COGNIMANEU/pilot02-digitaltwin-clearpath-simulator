@@ -1,0 +1,42 @@
+serial_number: r100-0051
+version: 0
+system:
+  hosts:
+    - hostname: cpr-r100-0051
+      ip: 192.168.131.1
+  ros2:
+    namespace: r100_0051
+    domain_id: 57
+    workspaces:
+    - /clearpath_ws/install/setup.bash
+#    middleware:
+#      implementation: rmw_fastrtps_cpp
+#      discovery: simple
+#      profile: /home/administrator/dds_config/fastdds_ridgeback_config.xml
+sensors:
+  lidar2d:
+    - model: hokuyo_ust
+      parent: chassis_link
+      launch_enabled: true
+      xyz: [0.3922, 0.0, 0.1856]
+      ros_parameters:
+        urg_node:
+          laser_frame_id: lidar2d_0_laser
+          ip_address: 192.168.131.14 # 192.168.131.20
+          ip_port: 10940
+          angle_min: -2.356
+          angle_max: 2.356
+    - model: sick_lms1xx
+      parent: chassis_link
+      launch_enabled: true
+      xyz: [-0.3455, 0.0, 0.1977]
+      rpy: [0.0, 0.0, 3.14159]
+      ros_parameters:
+        lms1xx:
+          frame_id: lidar2d_1_laser
+          host: 192.168.131.13 # 192.168.131.21
+          port: 2111
+platform:
+  controller: logitech # ps4 or logitech
+links:
+mounts:

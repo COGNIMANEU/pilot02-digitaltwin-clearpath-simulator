@@ -1,0 +1,22 @@
+services:
+  # Container for Clearpath  Simulator
+  clearpath_simulator:
+    build:
+      context: ./clearpath  
+    container_name: clearpath_simulator
+    environment:
+      - CONFIG_DIR=/clearpath_ws/config
+      - LAUNCH_FILE=simulation.launch.py 
+      - VNC_PASSWORD=1234  
+      - VNC_PORT=6080      
+      - RESOLUTION=1280x800
+      - COL_DEPTH=24
+    ports:
+      - "6080:6080"       # NoVNC navigator -> http://localhost:6080/vnc.html
+      - "5900:5900"       # VNC traditional
+    volumes:
+      - ./config:/clearpath_ws/config  
+    devices:
+      - "/dev/null:/dev/null"      
+    stdin_open: true
+    tty: true
